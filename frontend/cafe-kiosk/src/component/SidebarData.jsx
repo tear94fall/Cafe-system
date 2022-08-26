@@ -2,8 +2,15 @@ import React from 'react';
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
+import * as BoxIcons from "react-icons/bi";
 
 export const SidebarData = [
+    {
+        title: 'Coffees',
+        path: '/coffees',
+        icon: <BoxIcons.BiCoffeeTogo />,
+        cName: 'nav-text',
+    },
     {
         title: 'Home',
         path: '/',

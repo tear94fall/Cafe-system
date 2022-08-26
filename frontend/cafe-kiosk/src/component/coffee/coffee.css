@@ -1,0 +1,39 @@
+.CoffeeMenu {
+    display: flex;
+    border: 1px solid gray;
+    justify-content: 'space-between';
+    margin-left: 30px;
+    margin-right: 30px;
+    text-align: left;
+}
+
+.CoffeeBox {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.CoffeeImage {
+    width: 250px;
+    height: 250px;
+    align-items: center;
+    justify-content: center;
+}
+
+.plusButton {
+    width: 2.25rem;
+    margin-right: 5px;
+    font-size: 1.25rem;
+}
+
+.coffeeCount {
+    width: 2rem;
+    height: 1.5rem;
+    text-align: center;
+}
+
+.minusButton {
+    width: 2.25rem;
+    margin-left: 5px;
+    font-size: 1.25rem;
+}
