@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Card } from 'react-bootstrap';
 import "./coffee.css"
 
 export default function Coffee() {
@@ -20,6 +21,10 @@ export default function Coffee() {
                 <div className="CoffeeBox">
                     <img className="CoffeeImage" src="/assets/americano.jpeg" alt=""/>
                     <h5>아메리카노</h5>
+                    <text className='description'>
+                        풍미가 좋은 커피. 아메리카노
+                    </text>
+                    <h5>3500원</h5>
                     <button className='plusButton' onClick={onDecrease}>-</button>
                     <input className='coffeeCount' type="text" value={count}/>
                     <button className='minusButton' onClick={onIncrease}>+</button>
