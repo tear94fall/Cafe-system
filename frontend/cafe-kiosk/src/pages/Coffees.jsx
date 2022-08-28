@@ -1,5 +1,6 @@
 import React from "react";
 import Coffee from "../component/coffee/Coffee"
+import Footer from "../component/Footer";
 
 export default function Coffees() {
     return (
@@ -8,6 +9,8 @@ export default function Coffees() {
             <Coffee/>
             <Coffee/>
             <Coffee/>
+
+            <Footer/>
         </div>
     )
 }
