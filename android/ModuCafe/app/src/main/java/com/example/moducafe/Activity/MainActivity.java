@@ -1,8 +1,10 @@
-package com.example.moducafe;
+package com.example.moducafe.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.moducafe.R;
 
 public class MainActivity extends AppCompatActivity {
 

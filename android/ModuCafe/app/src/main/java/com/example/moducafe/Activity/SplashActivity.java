@@ -1,4 +1,4 @@
-package com.example.moducafe;
+package com.example.moducafe.Activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
