@@ -18,7 +18,7 @@ public class ItemController {
     private ItemService itemService;
 
     @PostMapping("/item/coffee")
-    public ResponseEntity<List<CoffeeDto>> userId() {
+    public ResponseEntity<List<CoffeeDto>> searchAllCoffees() {
         List<CoffeeDto> coffeeDtoList = itemService.getAllCoffees();
         return ResponseEntity.ok().body(coffeeDtoList);
     }

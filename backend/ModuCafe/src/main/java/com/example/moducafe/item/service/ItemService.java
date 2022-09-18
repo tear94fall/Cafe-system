@@ -25,4 +25,8 @@ public class ItemService {
                 .map(items -> new CoffeeDto((Coffee) items))
                 .collect(Collectors.toList());
     }
+
+    public Coffee join(Coffee coffee) {
+        return itemRepository.save(coffee);
+    }
 }

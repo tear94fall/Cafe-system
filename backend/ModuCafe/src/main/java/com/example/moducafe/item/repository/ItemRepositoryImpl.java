@@ -1,5 +1,6 @@
 package com.example.moducafe.item.repository;
 
+import com.example.moducafe.item.entity.Coffee;
 import com.example.moducafe.item.entity.Item;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -20,5 +21,13 @@ public class ItemRepositoryImpl implements ItemCustomRepository {
                 .selectFrom(item)
                 .leftJoin(coffee).on(coffee.eq(item))
                 .fetch();
+    }
+
+    @Override
+    public Coffee findOne(Long id) {
+        return queryFactory
+                .selectFrom(coffee)
+                .where(coffee.id.eq(id))
+                .fetchOne();
     }
 }
