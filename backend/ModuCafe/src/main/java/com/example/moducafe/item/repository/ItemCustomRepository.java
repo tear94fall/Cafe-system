@@ -10,4 +10,6 @@ public interface ItemCustomRepository {
     List<Item> findAllCoffees();
 
     Coffee findOne(Long id);
+
+    Coffee findByName(String name);
 }

@@ -30,4 +30,12 @@ public class ItemRepositoryImpl implements ItemCustomRepository {
                 .where(coffee.id.eq(id))
                 .fetchOne();
     }
+
+    @Override
+    public Coffee findByName(String name) {
+        return queryFactory
+                .selectFrom(coffee)
+                .where(coffee.name.eq(name))
+                .fetchOne();
+    }
 }

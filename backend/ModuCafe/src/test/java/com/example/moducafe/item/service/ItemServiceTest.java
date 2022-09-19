@@ -32,6 +32,22 @@ class ItemServiceTest {
         Coffee join = itemService.join(coffee);
 
         // then
-        assertEquals(coffee, itemRepository.findOne(join.getId()));
+        assertEquals(coffee, join);
+    }
+
+    @Test
+    @DisplayName("커피 메뉴 이름으로 조회 테스트")
+    public void getCoffeeByNameTest() throws Exception {
+        // given
+        Coffee coffee = new Coffee();
+        coffee.setName("에스프레소");
+        coffee.setPrice(3000);
+
+        // when
+        itemService.join(coffee);
+        Coffee find = itemService.findByName("에스프레소");
+
+        // then
+        assertEquals(coffee.getName(), find.getName());
     }
 }

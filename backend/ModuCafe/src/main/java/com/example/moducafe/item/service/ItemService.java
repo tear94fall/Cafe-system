@@ -29,4 +29,8 @@ public class ItemService {
     public Coffee join(Coffee coffee) {
         return itemRepository.save(coffee);
     }
+
+    public Coffee findByName(String name) {
+        return itemRepository.findByName(name);
+    }
 }
