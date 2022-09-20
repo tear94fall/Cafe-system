@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,5 +33,12 @@ public class ItemService {
 
     public Coffee findByName(String name) {
         return itemRepository.findByName(name);
+    }
+
+    public Item updatePrice(Long id, int price) {
+        Item item = itemRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        item.setPrice(price);
+
+        return item;
     }
 }

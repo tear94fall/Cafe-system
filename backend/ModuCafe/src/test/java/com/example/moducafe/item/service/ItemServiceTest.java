@@ -1,6 +1,7 @@
 package com.example.moducafe.item.service;
 
 import com.example.moducafe.item.entity.Coffee;
+import com.example.moducafe.item.entity.Item;
 import com.example.moducafe.item.repository.ItemRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -49,5 +50,22 @@ class ItemServiceTest {
 
         // then
         assertEquals(coffee.getName(), find.getName());
+    }
+
+    @Test
+    @DisplayName("메뉴 가격 변경 테스트")
+    public void changePrice() {
+        // given
+        Coffee coffee = new Coffee();
+        coffee.setName("아메리카노");
+        coffee.setPrice(2500);
+
+        // when
+        Coffee join = itemService.join(coffee);
+        int price = join.getPrice();
+        Item item = itemService.updatePrice(join.getId(), 3500);
+
+        // then
+        assertNotEquals(price, item.getPrice());
     }
 }
