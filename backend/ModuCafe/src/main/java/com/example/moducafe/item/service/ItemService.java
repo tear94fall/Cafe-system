@@ -41,4 +41,8 @@ public class ItemService {
 
         return item;
     }
+
+    public void removeItem(Item item) {
+        itemRepository.deleteById(item.getId());
+    }
 }

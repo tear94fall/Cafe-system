@@ -68,4 +68,21 @@ class ItemServiceTest {
         // then
         assertNotEquals(price, item.getPrice());
     }
+
+    @Test
+    @DisplayName("메뉴 삭제 테스트")
+    public void removeItem() {
+        // given
+        Coffee coffee = new Coffee();
+        coffee.setName("아메리카노");
+        coffee.setPrice(2500);
+
+        // when
+        Coffee join = itemService.join(coffee);
+        itemService.removeItem(join);
+        Coffee find = itemService.findByName(join.getName());
+
+        // then
+        assertNull(find);
+    }
 }
