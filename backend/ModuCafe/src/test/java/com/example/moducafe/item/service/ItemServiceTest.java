@@ -1,7 +1,6 @@
 package com.example.moducafe.item.service;
 
 import com.example.moducafe.item.entity.Coffee;
-import com.example.moducafe.item.entity.Item;
 import com.example.moducafe.item.repository.ItemRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,9 +15,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class ItemServiceTest {
 
     @Autowired
-    ItemService itemService;
-
-    @Autowired
     ItemRepository itemRepository;
 
     @Test
@@ -30,7 +26,7 @@ class ItemServiceTest {
         coffee.setPrice(2500);
 
         // when
-        Coffee join = itemService.join(coffee);
+        Coffee join = itemRepository.save(coffee);
 
         // then
         assertEquals(coffee, join);
@@ -45,8 +41,8 @@ class ItemServiceTest {
         coffee.setPrice(3000);
 
         // when
-        itemService.join(coffee);
-        Coffee find = itemService.findByName("에스프레소");
+        itemRepository.save(coffee);
+        Coffee find = itemRepository.findByName("에스프레소");
 
         // then
         assertEquals(coffee.getName(), find.getName());
@@ -61,12 +57,15 @@ class ItemServiceTest {
         coffee.setPrice(2500);
 
         // when
-        Coffee join = itemService.join(coffee);
-        int price = join.getPrice();
-        Item item = itemService.updatePrice(join.getId(), 3500);
+        Coffee save1 = itemRepository.save(coffee);
+        int price1 = save1.getPrice();
+        save1.setPrice(3500);
+        Coffee save2 = itemRepository.save(save1);
+        int price2 = save2.getPrice();
+
 
         // then
-        assertNotEquals(price, item.getPrice());
+        assertNotEquals(price1, price2);
     }
 
     @Test
@@ -78,9 +77,9 @@ class ItemServiceTest {
         coffee.setPrice(2500);
 
         // when
-        Coffee join = itemService.join(coffee);
-        itemService.removeItem(join);
-        Coffee find = itemService.findByName(join.getName());
+        Coffee save = itemRepository.save(coffee);
+        itemRepository.deleteById(save.getId());
+        Coffee find = itemRepository.findByName(save.getName());
 
         // then
         assertNull(find);

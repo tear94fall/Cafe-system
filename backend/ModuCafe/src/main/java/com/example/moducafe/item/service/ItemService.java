@@ -27,19 +27,19 @@ public class ItemService {
                 .collect(Collectors.toList());
     }
 
-    public Coffee join(Coffee coffee) {
-        return itemRepository.save(coffee);
+    public CoffeeDto join(Coffee coffee) {
+        return new CoffeeDto(itemRepository.save(coffee));
     }
 
-    public Coffee findByName(String name) {
-        return itemRepository.findByName(name);
+    public CoffeeDto findByName(String name) {
+        return new CoffeeDto(itemRepository.findByName(name));
     }
 
-    public Item updatePrice(Long id, int price) {
+    public int updatePrice(Long id, int price) {
         Item item = itemRepository.findById(id).orElseThrow(IllegalArgumentException::new);
         item.setPrice(price);
 
-        return item;
+        return item.getPrice();
     }
 
     public void removeItem(Item item) {
