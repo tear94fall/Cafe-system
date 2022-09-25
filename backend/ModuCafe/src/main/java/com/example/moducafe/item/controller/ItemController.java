@@ -4,9 +4,7 @@ import com.example.moducafe.item.dto.CoffeeDto;
 import com.example.moducafe.item.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -23,9 +21,15 @@ public class ItemController {
         return ResponseEntity.ok().body(coffeeDtoList);
     }
 
-    @PostMapping("/item/coffee")
-    public ResponseEntity<CoffeeDto> searchCoffee(@Valid @RequestParam String name) {
+    @GetMapping("/item/coffee/{name}")
+    public ResponseEntity<CoffeeDto> searchCoffee(@Valid @PathVariable String name) {
         CoffeeDto search = itemService.findByName(name);
         return ResponseEntity.ok().body(search);
+    }
+
+    @PostMapping("/item/coffee")
+    public ResponseEntity<CoffeeDto> createCoffee(@Valid @RequestParam CoffeeDto coffeeDto) {
+        CoffeeDto join = itemService.join(coffeeDto);
+        return ResponseEntity.ok().body(join);
     }
 }

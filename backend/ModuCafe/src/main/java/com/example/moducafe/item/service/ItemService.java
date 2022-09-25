@@ -27,8 +27,8 @@ public class ItemService {
                 .collect(Collectors.toList());
     }
 
-    public CoffeeDto join(Coffee coffee) {
-        return new CoffeeDto(itemRepository.save(coffee));
+    public CoffeeDto join(CoffeeDto coffeeDto) {
+        return new CoffeeDto(itemRepository.save(new Coffee(coffeeDto)));
     }
 
     public CoffeeDto findByName(String name) {
