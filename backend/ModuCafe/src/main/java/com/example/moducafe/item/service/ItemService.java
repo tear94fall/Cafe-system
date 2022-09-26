@@ -35,11 +35,11 @@ public class ItemService {
         return new CoffeeDto(itemRepository.findByName(name));
     }
 
-    public int updatePrice(Long id, int price) {
-        Item item = itemRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        item.setPrice(price);
+    public CoffeeDto updatePrice(CoffeeDto coffeeDto) {
+        Coffee find = itemRepository.findByName(coffeeDto.getName());
+        find.setPrice(coffeeDto.getPrice());
 
-        return item.getPrice();
+        return new CoffeeDto(itemRepository.save(find));
     }
 
     public void removeItem(Item item) {

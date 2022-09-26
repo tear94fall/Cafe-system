@@ -17,19 +17,21 @@ public class ItemController {
 
     @PostMapping("/item/coffees")
     public ResponseEntity<List<CoffeeDto>> searchAllCoffees() {
-        List<CoffeeDto> coffeeDtoList = itemService.getAllCoffees();
-        return ResponseEntity.ok().body(coffeeDtoList);
-    }
-
-    @GetMapping("/item/coffee/{name}")
-    public ResponseEntity<CoffeeDto> searchCoffee(@Valid @PathVariable String name) {
-        CoffeeDto search = itemService.findByName(name);
-        return ResponseEntity.ok().body(search);
+        return ResponseEntity.ok().body(itemService.getAllCoffees());
     }
 
     @PostMapping("/item/coffee")
     public ResponseEntity<CoffeeDto> createCoffee(@Valid @RequestParam CoffeeDto coffeeDto) {
-        CoffeeDto join = itemService.join(coffeeDto);
-        return ResponseEntity.ok().body(join);
+        return ResponseEntity.ok().body(itemService.join(coffeeDto));
+    }
+
+    @GetMapping("/item/coffee/{name}")
+    public ResponseEntity<CoffeeDto> searchCoffee(@Valid @PathVariable String name) {
+        return ResponseEntity.ok().body(itemService.findByName(name));
+    }
+
+    @PutMapping("/item/coffee")
+    public ResponseEntity<CoffeeDto> updateCoffee(@Valid @RequestParam CoffeeDto coffeeDto) {
+        return ResponseEntity.ok().body(itemService.updatePrice(coffeeDto));
     }
 }
