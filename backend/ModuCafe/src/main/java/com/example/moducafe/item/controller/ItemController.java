@@ -22,16 +22,23 @@ public class ItemController {
 
     @PostMapping("/item/coffee")
     public ResponseEntity<CoffeeDto> createCoffee(@Valid @RequestParam CoffeeDto coffeeDto) {
-        return ResponseEntity.ok().body(itemService.join(coffeeDto));
+        return ResponseEntity.ok().body(itemService.joinCoffee(coffeeDto));
     }
 
     @GetMapping("/item/coffee/{name}")
     public ResponseEntity<CoffeeDto> searchCoffee(@Valid @PathVariable String name) {
-        return ResponseEntity.ok().body(itemService.findByName(name));
+        return ResponseEntity.ok().body(itemService.findCoffeeByName(name));
     }
 
     @PutMapping("/item/coffee")
     public ResponseEntity<CoffeeDto> updateCoffee(@Valid @RequestParam CoffeeDto coffeeDto) {
-        return ResponseEntity.ok().body(itemService.updatePrice(coffeeDto));
+        return ResponseEntity.ok().body(itemService.updateCoffeePrice(coffeeDto));
     }
+
+    @DeleteMapping("/item/coffee/{name}")
+    public ResponseEntity<String> removeCoffee(@Valid @PathVariable String name) {
+        String deleteName = itemService.removeCoffee(name);
+        return ResponseEntity.ok().body(deleteName);
+    }
+
 }
