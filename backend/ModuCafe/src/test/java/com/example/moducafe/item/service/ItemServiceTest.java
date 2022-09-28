@@ -19,7 +19,7 @@ class ItemServiceTest {
 
     @Test
     @DisplayName("커피 메뉴 추가 테스트")
-    public void AddCoffeeTest() throws Exception {
+    public void AddCoffeeTest() {
         // given
         Coffee coffee = new Coffee();
         coffee.setName("아메리카노");
@@ -34,7 +34,7 @@ class ItemServiceTest {
 
     @Test
     @DisplayName("커피 메뉴 이름으로 조회 테스트")
-    public void getCoffeeByNameTest() throws Exception {
+    public void getCoffeeByNameTest() {
         // given
         Coffee coffee = new Coffee();
         coffee.setName("에스프레소");

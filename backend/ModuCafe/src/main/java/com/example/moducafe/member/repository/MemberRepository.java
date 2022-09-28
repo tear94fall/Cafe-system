@@ -1,9 +1,9 @@
 package com.example.moducafe.member.repository;
 
-import com.example.moducafe.item.entity.Item;
+import com.example.moducafe.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MemberRepository extends JpaRepository<Item, Long>, MemberCustomRepository {
+public interface MemberRepository extends JpaRepository<Member, Long>, MemberCustomRepository {
 }
