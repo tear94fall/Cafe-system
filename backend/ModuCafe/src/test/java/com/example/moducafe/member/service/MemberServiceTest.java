@@ -34,4 +34,21 @@ class MemberServiceTest {
         // then
         assertEquals(member, save);
     }
+
+    @Test
+    @DisplayName("회원 조회 테스트")
+    public void getMemberTest() {
+        // given
+        Member member = new Member();
+        member.setName("James");
+        member.setEmail("James@test.com");
+        member.setPhone("010-1234-5678");
+
+        // when
+        Member save = memberRepository.save(member);
+        Member find = memberRepository.findByName("James");
+
+        // then
+        assertEquals(save, find);
+    }
 }
