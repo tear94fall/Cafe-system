@@ -1,7 +1,5 @@
 package com.example.moducafe.member.service;
 
-import com.example.moducafe.item.entity.Coffee;
-import com.example.moducafe.item.repository.ItemRepository;
 import com.example.moducafe.member.entity.Member;
 import com.example.moducafe.member.repository.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -50,5 +48,25 @@ class MemberServiceTest {
 
         // then
         assertEquals(save, find);
+    }
+
+    @Test
+    @DisplayName("회원 이메일 변경 테스트")
+    public void changeName() {
+        // given
+        Member member = new Member();
+        member.setName("James");
+        member.setEmail("James@test.com");
+        member.setPhone("010-1234-5678");
+
+        // when
+        Member save1 = memberRepository.save(member);
+        String email1 = save1.getEmail();
+        save1.setEmail("James1234@test.com");
+        Member save2 = memberRepository.save(member);
+        String email2 = save2.getEmail();
+
+        // then
+        assertNotEquals(email1, email2);
     }
 }
