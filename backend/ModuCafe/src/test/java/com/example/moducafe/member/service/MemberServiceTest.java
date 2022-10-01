@@ -69,4 +69,22 @@ class MemberServiceTest {
         // then
         assertNotEquals(email1, email2);
     }
+
+    @Test
+    @DisplayName("회원 삭제 테스트")
+    public void removeMember() {
+        // given
+        Member member = new Member();
+        member.setName("James");
+        member.setEmail("James@test.com");
+        member.setPhone("010-1234-5678");
+
+        // when
+        Member save = memberRepository.save(member);
+        memberRepository.deleteById(save.getId());
+        Member find = memberRepository.findByName(save.getName());
+
+        // then
+        assertNull(find);
+    }
 }
