@@ -1,6 +1,7 @@
 package com.example.moducafe.Fragments;
 
-import android.graphics.drawable.GradientDrawable;
+import static com.google.android.material.tabs.TabLayout.*;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,17 +10,25 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
 
 import com.example.moducafe.R;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 public class FragmentHome extends Fragment {
+
+    private TabLayout categoryTabLayout;
+    private ViewPager2 viewPager2;
+    private ViewPagerAdapter viewPagerAdapter;
+    private static String[] categories = { "Coffee", "Latte", "Tea", "Beverage" };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,8 +83,18 @@ public class FragmentHome extends Fragment {
     }
 
     private void bindingView(View view) {
-        LinearLayout itemCategoryView = view.findViewById(R.id.viewCategoryNames);
-        buildCategoryScroll(itemCategoryView);
+        categoryTabLayout = view.findViewById(R.id.categoryTabs);
+        categoryTabLayout.addTab(categoryTabLayout.newTab().setText("Bread"));
+
+        viewPager2 = view.findViewById(R.id.view_pager);
+
+        viewPagerAdapter = new ViewPagerAdapter(requireActivity());
+        viewPager2.setAdapter(viewPagerAdapter);
+
+        categoryTabLayout.bringToFront();
+
+        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(categoryTabLayout, viewPager2, (tab, position) -> tab.setText(categories[position]));
+        tabLayoutMediator.attach();
     }
 
     private void getData() {
@@ -87,33 +106,56 @@ public class FragmentHome extends Fragment {
     }
 
     private void setButtonClickEvent() {
+        viewPager2.registerOnPageChangeCallback(new OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+            }
+        });
 
+        categoryTabLayout.addOnTabSelectedListener(new OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(Tab tab) {
+                viewPager2.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(Tab tab) {
+
+            }
+        });
     }
 
-    private void buildCategoryScroll(LinearLayout itemCategoryView) {
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    public static class ViewPagerAdapter extends FragmentStateAdapter {
+        public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
+            super(fragmentActivity);
+        }
 
-        for (int i = 0; i < 5; i++) {
-            Button categoryButton = new Button(requireActivity());
+        @NonNull
+        @Override
+        public Fragment createFragment(int position) {
+            Fragment fragment = null;
+            switch (position) {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    fragment = new FragmentItem(categories[position]);
+                    break;
+            }
 
-            GradientDrawable buttonShape = new GradientDrawable();
-            buttonShape.setShape(GradientDrawable.RECTANGLE);
-            buttonShape.setColor(ContextCompat.getColor(requireContext(), R.color.pastel_green_middle));
-            buttonShape.setCornerRadius(15);
+            assert fragment != null;
+            return fragment;
+        }
 
-            categoryButton.setText(String.valueOf(i));
-            categoryButton.setTextSize(16f);
-            categoryButton.setAllCaps(false);
-            categoryButton.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.pastel_green_bright));
-            categoryButton.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white));
-
-            layoutParams.setMargins(25, 25, i == 4 ? 0 : 25, 25);
-
-            categoryButton.setLayoutParams(layoutParams);
-            categoryButton.setTag(i);
-            categoryButton.setBackground(buttonShape);
-
-            itemCategoryView.addView(categoryButton);
+        @Override
+        public int getItemCount() {
+            return 4;
         }
     }
 }
