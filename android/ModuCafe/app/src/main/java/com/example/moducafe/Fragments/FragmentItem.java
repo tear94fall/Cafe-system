@@ -13,13 +13,18 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.moducafe.Adapter.ItemAdapter;
 import com.example.moducafe.R;
 
 public class FragmentItem extends Fragment {
 
     private String category = "";
-    private Button button;
+
+    RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
 
     public FragmentItem(String category) {
         this.category = category;
@@ -78,8 +83,14 @@ public class FragmentItem extends Fragment {
     }
 
     private void bindingView(View view) {
-        button = view.findViewById(R.id.button);
-        button.setText(category);
+        recyclerView = view.findViewById(R.id.itemRecyclerView);
+        recyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.scrollToPosition(0);
+
+        recyclerView.setAdapter(new ItemAdapter());
     }
 
     private void getData() {

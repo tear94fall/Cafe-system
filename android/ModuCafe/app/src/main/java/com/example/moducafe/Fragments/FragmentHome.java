@@ -91,8 +91,6 @@ public class FragmentHome extends Fragment {
         viewPagerAdapter = new ViewPagerAdapter(requireActivity());
         viewPager2.setAdapter(viewPagerAdapter);
 
-        categoryTabLayout.bringToFront();
-
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(categoryTabLayout, viewPager2, (tab, position) -> tab.setText(categories[position]));
         tabLayoutMediator.attach();
     }
