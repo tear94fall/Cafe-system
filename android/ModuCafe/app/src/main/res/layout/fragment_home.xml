@@ -45,4 +45,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/shopping_card_floating_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/shopping_cart"
+        android:src="@drawable/ic_baseline_shopping_cart_24"
+        app:backgroundTint="@color/pastel_green_middle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/categoryTabs" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

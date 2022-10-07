@@ -20,6 +20,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
 
 import com.example.moducafe.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -28,6 +29,7 @@ public class FragmentHome extends Fragment {
     private TabLayout categoryTabLayout;
     private ViewPager2 viewPager2;
     private ViewPagerAdapter viewPagerAdapter;
+    private FloatingActionButton floatingActionButton;
     private static String[] categories = { "Coffee", "Latte", "Tea", "Beverage" };
 
     @Override
@@ -91,6 +93,8 @@ public class FragmentHome extends Fragment {
         viewPagerAdapter = new ViewPagerAdapter(requireActivity());
         viewPager2.setAdapter(viewPagerAdapter);
 
+        floatingActionButton = view.findViewById(R.id.shopping_card_floating_button);
+
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(categoryTabLayout, viewPager2, (tab, position) -> tab.setText(categories[position]));
         tabLayoutMediator.attach();
     }
@@ -126,6 +130,10 @@ public class FragmentHome extends Fragment {
             public void onTabReselected(Tab tab) {
 
             }
+        });
+
+        floatingActionButton.setOnClickListener(v -> {
+            // go to shopping cart intent
         });
     }
 
