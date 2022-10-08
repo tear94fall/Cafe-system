@@ -2,6 +2,7 @@ package com.example.moducafe.Fragments;
 
 import static com.google.android.material.tabs.TabLayout.*;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
 
+import com.example.moducafe.Activity.MainActivity;
+import com.example.moducafe.Activity.ShoppingCartActivity;
 import com.example.moducafe.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
@@ -134,6 +137,9 @@ public class FragmentHome extends Fragment {
 
         floatingActionButton.setOnClickListener(v -> {
             // go to shopping cart intent
+
+            Intent intent = new Intent(requireActivity().getApplicationContext(), ShoppingCartActivity.class);
+            startActivity(intent);
         });
     }
 
