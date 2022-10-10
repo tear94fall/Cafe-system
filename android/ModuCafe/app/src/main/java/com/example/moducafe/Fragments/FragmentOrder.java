@@ -12,10 +12,17 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.moducafe.Adapter.ItemAdapter;
+import com.example.moducafe.Adapter.OrderAdapter;
 import com.example.moducafe.R;
 
 public class FragmentOrder extends Fragment {
+
+    RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,11 @@ public class FragmentOrder extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        bindingView(view);
+        getData();
+        setData();
+        setButtonClickEvent();
     }
 
     @Override
@@ -62,6 +74,29 @@ public class FragmentOrder extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
+    }
+
+    private void bindingView(View view) {
+        recyclerView = view.findViewById(R.id.orderRecyclerView);
+        recyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.scrollToPosition(0);
+
+        recyclerView.setAdapter(new OrderAdapter());
+    }
+
+    private void getData() {
+
+    }
+
+    private void setData() {
+
+    }
+
+    private void setButtonClickEvent() {
+
     }
 }
 

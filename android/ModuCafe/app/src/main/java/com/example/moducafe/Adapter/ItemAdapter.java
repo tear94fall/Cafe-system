@@ -1,7 +1,5 @@
 package com.example.moducafe.Adapter;
 
-import static androidx.core.app.ActivityCompat.startActivityForResult;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -24,8 +22,6 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.moducafe.Activity.ItemPopupActivity;
-import com.example.moducafe.Activity.MainActivity;
-import com.example.moducafe.Activity.ShoppingCartActivity;
 import com.example.moducafe.R;
 
 import java.util.ArrayList;
@@ -58,8 +54,8 @@ public class ItemAdapter extends RecyclerView.Adapter<com.example.moducafe.Adapt
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         ItemDto item = this.itemDtoList.get(position);
 
-        holder.setUserInfo(item);
-        holder.setUserClickEvent(item);
+        holder.setItemInfo(item);
+        holder.setItemClickEvent(item);
     }
 
     @Override
@@ -83,7 +79,7 @@ public class ItemAdapter extends RecyclerView.Adapter<com.example.moducafe.Adapt
             itemPrice = itemView.findViewById(R.id.item_price);
         }
 
-        public void setUserInfo(ItemDto item) {
+        public void setItemInfo(ItemDto item) {
             this.itemName.setText(item.getName());
             this.itemNameEnglish.setText(item.getEnglishName());
             this.itemPrice.setText(item.getPrice() + "원");
@@ -111,7 +107,7 @@ public class ItemAdapter extends RecyclerView.Adapter<com.example.moducafe.Adapt
                     .into(itemImage);
         }
 
-        public void setUserClickEvent(ItemDto item) {
+        public void setItemClickEvent(ItemDto item) {
             this.itemViewLayout.setOnClickListener(v -> {
                 Intent intent = new Intent(v.getContext(), ItemPopupActivity.class);
                 v.getContext().startActivity(intent);
