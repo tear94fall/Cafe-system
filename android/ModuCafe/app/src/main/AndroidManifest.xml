@@ -12,7 +12,7 @@
         <activity android:name=".Activity.MainActivity" />
         <activity android:name=".Activity.LoginActivity" />
         <activity android:name=".Activity.ShoppingCartActivity" />
-        <activity android:name=".Activity.ItemPopupActivity" android:theme="@style/Theme.AppCompat.DayNight.Dialog" />
+        <activity android:name=".Activity.ItemActivity" />
 
         <activity
             android:name=".Activity.SplashActivity"

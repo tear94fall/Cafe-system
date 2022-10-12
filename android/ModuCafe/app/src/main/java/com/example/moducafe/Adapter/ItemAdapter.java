@@ -21,7 +21,7 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.example.moducafe.Activity.ItemPopupActivity;
+import com.example.moducafe.Activity.ItemActivity;
 import com.example.moducafe.R;
 
 import java.util.ArrayList;
@@ -109,7 +109,8 @@ public class ItemAdapter extends RecyclerView.Adapter<com.example.moducafe.Adapt
 
         public void setItemClickEvent(ItemDto item) {
             this.itemViewLayout.setOnClickListener(v -> {
-                Intent intent = new Intent(v.getContext(), ItemPopupActivity.class);
+                Intent intent = new Intent(v.getContext(), ItemActivity.class);
+                intent.putExtra("itemName", item.getName());
                 v.getContext().startActivity(intent);
             });
         }

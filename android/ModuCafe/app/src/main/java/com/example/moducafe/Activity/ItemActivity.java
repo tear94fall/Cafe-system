@@ -1,35 +1,37 @@
 package com.example.moducafe.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.moducafe.R;
 
-public class ItemPopupActivity extends AppCompatActivity {
+public class ItemActivity extends AppCompatActivity {
+
+    private String itemName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_item_popup);
+        setContentView(R.layout.activity_item);
 
-        bindingView();
         getData();
         setData();
+        bindingView();
         setButtonClickEvent();
     }
 
-    private void setData() {
-
+    private void getData() {
+        Intent intent = getIntent();
+        itemName = intent.getStringExtra("itemName");
     }
 
-    private void getData() {
-
+    private void setData() {
     }
 
     private void bindingView() {
+        setTitle(itemName);
     }
 
     private void setButtonClickEvent() {
