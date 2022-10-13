@@ -1,5 +1,6 @@
 package com.example.moducafe.Adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.moducafe.Activity.ItemActivity;
+import com.example.moducafe.Activity.OrderActivity;
 import com.example.moducafe.R;
 
 import java.util.ArrayList;
@@ -75,6 +78,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
         public void setOrderClickEvent(OrderDto order) {
             this.orderViewLayout.setOnClickListener(v -> {
+                Intent intent = new Intent(v.getContext(), OrderActivity.class);
+                intent.putExtra("orderNumber", String.valueOf(order.getId()));
+                v.getContext().startActivity(intent);
             });
         }
     }

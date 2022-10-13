@@ -13,6 +13,7 @@
         <activity android:name=".Activity.LoginActivity" />
         <activity android:name=".Activity.ShoppingCartActivity" />
         <activity android:name=".Activity.ItemActivity" />
+        <activity android:name=".Activity.OrderActivity" />
 
         <activity
             android:name=".Activity.SplashActivity"
