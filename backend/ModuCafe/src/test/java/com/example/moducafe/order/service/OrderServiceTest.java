@@ -1,6 +1,5 @@
 package com.example.moducafe.order.service;
 
-import com.example.moducafe.member.entity.Member;
 import com.example.moducafe.order.entity.Order;
 import com.example.moducafe.order.repository.OrderRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -8,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -52,5 +49,26 @@ class OrderServiceTest {
 
         // then
         assertEquals(save, find);
+    }
+
+    @Test
+    @DisplayName("주문 가격 변경 테스트")
+    public void changeName() {
+        // given
+        Order order = new Order();
+        order.setNumber("1234");
+        order.setName("Jason");
+        order.setCount(3);
+        order.setPrice(12000);
+
+        // when
+        Order save1 = orderRepository.save(order);
+        int price1 = save1.getPrice();
+        save1.setPrice(15000);
+        Order save2 = orderRepository.save(save1);
+        int price2 = save2.getPrice();
+
+        // then
+        assertNotEquals(price1, price2);
     }
 }
