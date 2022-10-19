@@ -71,4 +71,23 @@ class OrderServiceTest {
         // then
         assertNotEquals(price1, price2);
     }
+
+    @Test
+    @DisplayName("주문 삭제 테스트")
+    public void removeMember() {
+        // given
+        Order order = new Order();
+        order.setNumber("1234");
+        order.setName("Jason");
+        order.setCount(3);
+        order.setPrice(12000);
+
+        // when
+        Order save = orderRepository.save(order);
+        orderRepository.deleteById(save.getId());
+        Order find = orderRepository.findByNumber(save.getNumber());
+
+        // then
+        assertNull(find);
+    }
 }
