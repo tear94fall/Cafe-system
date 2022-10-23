@@ -34,10 +34,9 @@
             android:layout_width="0dp"
             android:layout_height="15dp"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="12dp"
             android:autoSizeTextType="uniform"
             android:text="주문 잔수"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/order_price"
             app:layout_constraintStart_toStartOf="@+id/order_number"
             app:layout_constraintTop_toBottomOf="@+id/order_number" />
 
@@ -46,13 +45,46 @@
             android:layout_width="0dp"
             android:layout_height="20dp"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="4dp"
             android:autoSizeTextType="uniform"
             android:text="주문 가격"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/minus_button"
             app:layout_constraintStart_toStartOf="@+id/order_number"
             app:layout_constraintTop_toBottomOf="@+id/order_quantity" />
+
+        <Button
+            android:id="@+id/minus_button"
+            android:layout_width="47dp"
+            android:layout_height="47dp"
+            android:layout_marginEnd="4dp"
+            android:text="-"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/count"
+            app:layout_constraintTop_toBottomOf="@+id/order_number"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/add_button"
+            android:layout_width="47dp"
+            android:layout_height="47dp"
+            android:layout_marginEnd="12dp"
+            android:text="+"
+            app:layout_constraintBottom_toBottomOf="@+id/minus_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/minus_button" />
+
+        <TextView
+            android:id="@+id/count"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="4dp"
+            android:autoSizeTextType="uniform"
+            android:text="1234"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/add_button"
+            app:layout_constraintEnd_toStartOf="@+id/add_button"
+            app:layout_constraintTop_toTopOf="@+id/add_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
