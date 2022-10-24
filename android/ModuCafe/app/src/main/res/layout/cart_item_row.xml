@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/orderViewLayout">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/orderCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/order_number"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:autoSizeTextType="uniform"
+            android:text="메뉴 이름"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/item_image2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/order_quantity"
+            android:layout_width="0dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="6dp"
+            android:autoSizeTextType="uniform"
+            android:text="메뉴 잔수"
+            app:layout_constraintEnd_toStartOf="@+id/minus_button"
+            app:layout_constraintStart_toStartOf="@+id/order_number"
+            app:layout_constraintTop_toBottomOf="@+id/order_number" />
+
+        <TextView
+            android:id="@+id/order_price"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="6dp"
+            android:autoSizeTextType="uniform"
+            android:text="메뉴 가격"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/order_quantity"
+            app:layout_constraintStart_toStartOf="@+id/order_number"
+            app:layout_constraintTop_toBottomOf="@+id/order_quantity" />
+
+        <Button
+            android:id="@+id/minus_button"
+            android:layout_width="47dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="6dp"
+            android:text="-"
+            app:layout_constraintEnd_toStartOf="@+id/count"
+            app:layout_constraintTop_toBottomOf="@+id/order_number" />
+
+        <Button
+            android:id="@+id/add_button"
+            android:layout_width="47dp"
+            android:layout_height="47dp"
+            android:text="+"
+            app:layout_constraintEnd_toEndOf="@+id/order_number"
+            app:layout_constraintTop_toTopOf="@+id/minus_button" />
+
+        <TextView
+            android:id="@+id/count"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="6dp"
+            android:autoSizeTextType="uniform"
+            android:text="3 잔"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/minus_button"
+            app:layout_constraintEnd_toStartOf="@+id/add_button"
+            app:layout_constraintTop_toTopOf="@+id/minus_button" />
+
+        <ImageView
+            android:id="@+id/item_image2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
