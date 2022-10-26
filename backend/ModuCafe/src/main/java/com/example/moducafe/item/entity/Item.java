@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,4 +24,7 @@ public abstract class Item extends BaseTimeEntity {
     private int price;
 
     private int quantity;
+
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
+    private List<CategoryItem> orderItems = new ArrayList<>();
 }
