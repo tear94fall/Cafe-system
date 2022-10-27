@@ -22,10 +22,20 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
 
 import com.example.moducafe.Activity.MainActivity;
 import com.example.moducafe.Activity.ShoppingCartActivity;
+import com.example.moducafe.Adapter.CategoryDto;
 import com.example.moducafe.R;
+import com.example.moducafe.Retrofit.RetrofitClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FragmentHome extends Fragment {
 
@@ -33,7 +43,8 @@ public class FragmentHome extends Fragment {
     private ViewPager2 viewPager2;
     private ViewPagerAdapter viewPagerAdapter;
     private FloatingActionButton floatingActionButton;
-    private static String[] categories = { "Coffee", "Latte", "Tea", "Beverage" };
+    private TabLayoutMediator tabLayoutMediator;
+    private static List<CategoryDto> categoryList = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,21 +100,17 @@ public class FragmentHome extends Fragment {
 
     private void bindingView(View view) {
         categoryTabLayout = view.findViewById(R.id.categoryTabs);
-        categoryTabLayout.addTab(categoryTabLayout.newTab().setText("Bread"));
-
         viewPager2 = view.findViewById(R.id.view_pager);
 
-        viewPagerAdapter = new ViewPagerAdapter(requireActivity());
-        viewPager2.setAdapter(viewPagerAdapter);
+        categoryTabLayout.addTab(categoryTabLayout.newTab().setText("COFFE"));
+        categoryTabLayout.addTab(categoryTabLayout.newTab().setText("LATTE"));
+        categoryTabLayout.addTab(categoryTabLayout.newTab().setText("BEVERAGE"));
 
         floatingActionButton = view.findViewById(R.id.shopping_card_floating_button);
-
-        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(categoryTabLayout, viewPager2, (tab, position) -> tab.setText(categories[position]));
-        tabLayoutMediator.attach();
     }
 
     private void getData() {
-
+        getAllItems();
     }
 
     private void setData() {
@@ -157,7 +164,7 @@ public class FragmentHome extends Fragment {
                 case 1:
                 case 2:
                 case 3:
-                    fragment = new FragmentItem(categories[position]);
+                    fragment = new FragmentItem(categoryList.get(position).getName());
                     break;
             }
 
@@ -169,5 +176,44 @@ public class FragmentHome extends Fragment {
         public int getItemCount() {
             return 4;
         }
+    }
+
+    // Retrofit function
+    public void getAllItems() {
+        Call<List<CategoryDto>> call = RetrofitClient.getItemApiService().RequestAllItems();
+
+        call.enqueue(new Callback<List<CategoryDto>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<CategoryDto>> call, @NonNull Response<List<CategoryDto>> response) {
+                if(!response.isSuccessful()){
+                    Log.e("연결이 비정상적 : ", "error code : " + response.code());
+                    return;
+                }
+
+                assert response.body() != null;
+                List<CategoryDto> categoryDtoList = response.body();
+
+                if(categoryDtoList.size()>0) {
+                    categoryList = categoryDtoList;
+
+                    categoryList.stream()
+                            .filter(Objects::nonNull)
+                            .forEach(categoryDto -> categoryTabLayout.addTab(categoryTabLayout.newTab().setText(categoryDto.getName())));
+
+                    viewPagerAdapter = new ViewPagerAdapter(requireActivity());
+                    viewPager2.setAdapter(viewPagerAdapter);
+
+                    tabLayoutMediator = new TabLayoutMediator(categoryTabLayout, viewPager2, (tab, position) -> tab.setText(categoryList.get(position).getName()));
+                    tabLayoutMediator.attach();
+                }
+
+                Log.d("채팅방 나가기 요청 : ", response.body().toString());
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<CategoryDto>> call, @NonNull Throwable t) {
+                Log.e("채팅방 나가기 요청 실패", t.getMessage());
+            }
+        });
     }
 }
