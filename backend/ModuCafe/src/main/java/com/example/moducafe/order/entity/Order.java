@@ -1,5 +1,6 @@
 package com.example.moducafe.order.entity;
 
+import com.example.moducafe.member.entity.Member;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "orders")
 public class Order {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
     private Long id;
 
@@ -27,4 +28,8 @@ public class Order {
 
     @NotNull
     private int price;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
 }
