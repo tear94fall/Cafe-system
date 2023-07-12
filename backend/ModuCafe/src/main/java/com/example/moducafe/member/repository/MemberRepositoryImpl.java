@@ -18,4 +18,21 @@ public class MemberRepositoryImpl implements MemberCustomRepository{
                 .where(member.name.eq(name))
                 .fetchOne();
     }
+
+    @Override
+    public Member findByEmail(String email) {
+        return queryFactory
+                .selectFrom(member)
+                .where(member.email.eq(email))
+                .fetchOne();
+    }
+
+    @Override
+    public Long deleteByEmail(String email) {
+        return queryFactory
+                .delete(member)
+                .where(member.email.eq(email))
+                .execute();
+    }
 }
+

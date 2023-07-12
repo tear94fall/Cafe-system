@@ -28,4 +28,17 @@ public class MemberService {
     public MemberDto saveMember(MemberDto memberDto) {
         return new MemberDto(memberRepository.save(new Member(memberDto)));
     }
+
+    public MemberDto updateMember(MemberDto memberDto) {
+        Member searchMember = memberRepository.findByEmail(memberDto.getEmail());
+        searchMember.setName(memberDto.getName());
+        searchMember.setPhone(memberDto.getPhone());
+
+        Member save = memberRepository.save(searchMember);
+        return new MemberDto(save);
+    }
+
+    public Long deleteMember(String email) {
+        return memberRepository.deleteByEmail(email);
+    }
 }
