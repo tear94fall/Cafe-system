@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Entity
 @Getter
 @Setter
-@Table(name = "members")
+@Table(name = "members", indexes = @Index(name = "i_member", columnList = "email"))
 @NoArgsConstructor
 public class Member {
     @Id
@@ -27,6 +27,7 @@ public class Member {
     private String name;
 
     @NotNull
+    @Column(name="email" , unique=true)
     private String email;
 
     @NotNull
