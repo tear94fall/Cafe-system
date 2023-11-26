@@ -1,0 +1,20 @@
+### Member Request ###
+
+### 멤버 조회 요청
+GET http://localhost:8080/api/v1/member
+
+### 멤버 추가 요청
+POST http://localhost:8080/api/v1/member
+Content-Type: application/json
+
+< ./Member.json
+
+
+### 멤버 수정 요청
+PUT http://localhost:8080/api/v1/member
+Content-Type: application/json
+
+< ./MemberUpdate.json
+
+### 멤버 삭제 요청
+DELETE http://localhost:8080/api/v1/member/joonsub.lim@test.com

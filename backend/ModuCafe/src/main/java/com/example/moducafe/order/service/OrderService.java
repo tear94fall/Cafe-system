@@ -1,6 +1,6 @@
 package com.example.moducafe.order.service;
 
-import com.example.moducafe.member.repository.MemberRepository;
+import com.example.moducafe.order.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +11,5 @@ import javax.transaction.Transactional;
 @RequiredArgsConstructor
 public class OrderService {
 
-    private final MemberRepository memberRepository;
-
+    private final OrderRepository orderRepository;
 }
