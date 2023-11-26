@@ -1,0 +1,45 @@
+server:
+  port: 9000
+
+eureka:
+  instance:
+    instance-id: gateway-service
+
+
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+spring:
+  application:
+    name: gateway-service
+
+  cloud:
+    gateway:
+      routes:
+        - id: member-service
+          uri: lb://MEMBER-SERVICE
+          predicates:
+            - Path=/member-service/api/member/signup
+            - Method=POST
+          filters:
+            - RewritePath=/member-service/(?<segment>.*), /$\{segment}
+        - id: member-service
+          uri: lb://MEMBER-SERVICE
+          predicates:
+            - Path=/member-service/api/member/login
+            - Method=POST
+          filters:
+            - RewritePath=/member-service/(?<segment>.*), /$\{segment}
+        - id: member-service
+          uri: lb://MEMBER-SERVICE
+          predicates:
+            - Path=/member-service/api/member/**
+          filters:
+            - JwtAuthenticationFilter
+            - RewritePath=/member-service/(?<segment>.*), /$\{segment}
+
+jwt:
+  secret: DadFufN4Oui8Bfv3ScFj6R9fyJ9hD45E6AGFsXgFsRhT4YSdSb
